@@ -61,9 +61,18 @@ DimPlot(seu, group.by = 'clone_opt',shuffle = T, raster=T,cols = mypal[1:clones]
 DimPlot(seu, group.by = 'GT_opt',shuffle = T, raster=T)
 
 # Tumor versus normal probability
-FeaturePlot(seu, features  = c('p_cnv','p_cnv_x','p_cnv_y'),order = T, raster=T)&
-  scale_color_gradient2(low = 'royalblue', mid = 'white', high = 'red3', midpoint = 0.5, limits = c(0,1), name = 'Posterior')&
-  ggtitle('Tumor vs normal probability\n(joint, gex, allele)')
+p1<-FeaturePlot(seu, features  = c('p_cnv'),order = T, raster=T)+
+  scale_color_gradient2(low = 'royalblue', mid = 'white', high = 'red3', midpoint = 0.5, limits = c(0,1), name = 'Posterior')+
+  ggtitle('Tumor vs normal probability\n(joint)')
+
+p2<-FeaturePlot(seu, features  = c('p_cnv_x'),order = T, raster=T)+
+  scale_color_gradient2(low = 'royalblue', mid = 'white', high = 'red3', midpoint = 0.5, limits = c(0,1), name = 'Posterior')+
+  ggtitle('Tumor vs normal probability\n(gex)')
+
+p3<-FeaturePlot(seu, features  = c('p_cnv_y'),order = T, raster=T)+
+  scale_color_gradient2(low = 'royalblue', mid = 'white', high = 'red3', midpoint = 0.5, limits = c(0,1), name = 'Posterior')+
+  ggtitle('Tumor vs normal probability\n(allele)')
+print((p1+p2 +p3)+plot_layout(ncol=2))
 
 # Tumor phylogeny
 nb$plot_sc_tree(
