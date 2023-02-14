@@ -49,8 +49,6 @@ out = run_numbat(count_mat=count_mat, # gene x cell integer UMI count matrix
                  ncores = 16,
                  plot = TRUE)
 
-saveRDS(out,paste0('data/',pat,'/',pat,'_numbat_out.rds'))
-
 # Run plotting script
 system(paste0('Rscript ~/single_cell_tools/numbat/3_numbat_plots.R ',pat))
 
